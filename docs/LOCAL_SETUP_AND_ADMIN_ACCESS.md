@@ -117,9 +117,34 @@ Invoke-RestMethod http://localhost:4000/api/health
 
 Expected health response includes `status: ok` and database connection `connected`.
 
-## 5. Configure and start the frontend
+## 5. Run both servers in VS Code
 
-Open a second PowerShell terminal from the repository root:
+Open the cloned repository folder in VS Code:
+
+`HK_Gem_House_Admin_Test`
+
+You need **two separate VS Code integrated terminals**. Keep both terminals running while using the website.
+
+### Terminal 1 — Backend API
+
+In VS Code, select **Terminal → New Terminal**. In this terminal, move into the backend folder:
+
+```powershell
+cd backend
+npm ci
+```
+
+Run `npm ci` only during initial setup or when dependencies change. After configuring `backend/.env` and applying approved local database migrations, start the API:
+
+```powershell
+npm run dev
+```
+
+Keep this terminal open. The API runs at `http://localhost:4000`.
+
+### Terminal 2 — Frontend website and Admin Portal
+
+In VS Code, select **Terminal → New Terminal** again. This second terminal starts at the repository root. Move into the frontend folder:
 
 ```powershell
 cd hong-kong-gem-house-website
@@ -127,32 +152,40 @@ npm ci
 Copy-Item .env.example .env.local
 ```
 
-Ensure `hong-kong-gem-house-website/.env.local` contains:
+Run `npm ci` during initial setup or when dependencies change. Ensure `hong-kong-gem-house-website/.env.local` contains:
 
 ```dotenv
 VITE_API_BASE_URL=http://localhost:4000
 VITE_WHATSAPP_NUMBER=
 ```
 
-The WhatsApp number is optional for local development. Start Vite:
+The WhatsApp number is optional for local development. Start the frontend:
 
 ```powershell
 npm run dev
 ```
 
-Keep this terminal open.
+Keep this terminal open. Vite normally runs at `http://localhost:5173`.
 
-## 6. Open the website and Admin Portal
+### Open the website
 
 - Public website: http://localhost:5173/
 - Owner Admin Portal: http://localhost:5173/admin/login
-- Backend health: http://localhost:4000/api/health
+- Backend health check: http://localhost:4000/api/health
 
-Sign in using the owner email and the temporary password configured before running the one-time bootstrap. On the first sign-in, complete the required authenticator-app MFA setup.
+Both terminal windows must remain running. The frontend uses the backend at `http://localhost:4000`.
+
+## 6. Admin sign-in details
+
+- Admin email: use the company-approved owner email configured as `ADMIN_OWNER_EMAIL` before the one-time bootstrap.
+- Admin password: supplied separately by the account owner. Do not add the real password to this guide or to GitHub.
+- Login URL: http://localhost:5173/admin/login
+- MFA: required. When the login asks for a verification code, contact the account owner to receive the current time-sensitive authenticator code through a separate secure channel. Do not store verification codes in this repository.
+
+If this is the first sign-in, follow the authenticator-app enrollment prompt before completing MFA.
 
 ## 7. Admin account details and security
 
-- Owner/admin email: use the company-approved owner email configured in `ADMIN_OWNER_EMAIL` before bootstrap.
 - Initial password: created privately by the person setting up the local database; there is no default password in the repository.
 - MFA: required. Complete authenticator-app enrollment at first sign-in.
 - The bootstrap creates only the initial owner. The staff directory does not create portal login accounts.
