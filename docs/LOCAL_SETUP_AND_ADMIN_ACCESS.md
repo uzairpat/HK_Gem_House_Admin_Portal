@@ -58,7 +58,7 @@ DATABASE_SSL=false
 CORS_ORIGIN=http://localhost:5173,http://localhost:5174
 SESSION_SECRET=PASTE_A_RANDOM_SECRET_AT_LEAST_32_CHARACTERS
 APP_BASE_URL=http://localhost:5173
-ADMIN_OWNER_EMAIL=mohameduzair17@gmail.com
+ADMIN_OWNER_EMAIL=owner@your-company-domain.com
 ADMIN_OWNER_PASSWORD=SET_A_PRIVATE_TEMPORARY_PASSWORD_AT_LEAST_16_CHARACTERS
 MFA_ENCRYPTION_KEY=PASTE_A_PRIVATE_BASE64_32_BYTE_KEY
 ```
@@ -152,7 +152,7 @@ Sign in using the owner email and the temporary password configured before runni
 
 ## 7. Admin account details and security
 
-- Owner/admin email for the initial local setup: `mohameduzair17@gmail.com`
+- Owner/admin email: use the company-approved owner email configured in `ADMIN_OWNER_EMAIL` before bootstrap.
 - Initial password: created privately by the person setting up the local database; there is no default password in the repository.
 - MFA: required. Complete authenticator-app enrollment at first sign-in.
 - The bootstrap creates only the initial owner. The staff directory does not create portal login accounts.
