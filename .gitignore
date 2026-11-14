@@ -1,0 +1,7 @@
+# Netlify local state
+.netlify/
+
+# Root-level environment files
+.env
+.env.*
+!.env.example
